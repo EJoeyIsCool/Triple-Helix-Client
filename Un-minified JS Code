@@ -81,7 +81,76 @@ Make sure to prefix the code it gives you with "javascript:" before use to guare
             action: function() {
               javascript:(function(x,y){if(!window.click){window.click=!0,document.body.style.cursor='crosshair';var cps=prompt('Autoclicker CPS: (Under 200 recommended)');if(!cps||isNaN(cps)?(alert('You entered something wrong. Try running the script again.'),end()):alert('Autoclicker activated at '+cps+' CPS! Do [ctrl+e] to stop.'),addEventListener('mousemove',e=>{x=e.clientX,y=e.clientY}),addEventListener('keydown',e=>{'e'===e.key&&e.ctrlKey&&(alert('Autoclicker deactivated! Click the bookmark again to reactivate!'),end())}),window.click)var int=setInterval(function(){var e=document.elementFromPoint(x,y);e&&e.click()},1e3/cps);function end(){clearInterval(int),window.click=!1,document.body.style.cursor='default'}}})();
             }
+          },
+          {
+            type: 'Button',
+            name: 'Clear Cookies',
+            action: function() {
+              javascript:(function(){document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); }); })();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Calculator',
+            action: function() {
+              javascript:void(JSC());function JSC(){var d=document;var b=d.getElementsByTagName('body')[0];var dv=d.createElement('div');dv2=d.createElement('div');var inp=d.createElement('input');var an=d.createElement('a');dvs=dv.style;dvs.position='absolute';dvs.top='50%';dvs.left='50%';dvs.width='300px';dvs.height='60px';dvs.margin='-50px 0 0 -170px';dvs.border='3px double #999';dvs.padding='20px';dvs.opacity='0.95';dvs.backgroundColor='#CCC';dvs.fontSize='60px';dvs.lineHeight='60px';dvs.textAlign='right';b.appendChild(dv);dv2s=dv2.style;dv2s.position='absolute';dv2s.top='50%';dv2s.left='50%';dv2s.height='20px';dv2s.margin='-70px 0 0 -170px';dv2s.padding='0 10px';dv2s.backgroundColor='#999';dv2s.fontSize='10px';dv2s.lineHeight='20px';an.style.color='#FFF';an.appendChild(d.createTextNode('JSCalc'));dv2.appendChild(an);b.appendChild(dv2);an.setAttribute('href','http://www.themaninblue.com/experiment/JSCalc/');inp.type='text';is=inp.style;is.position='absolute';is.top='50%';is.left='50%';is.width='300px';is.margin='-30px 0 0 -150px';is.border='1px solid #CCC';is.backgroundColor='#CCC';is.font='60px Arial,Helvetica,sans-serif';is.color='#FFF';is.textAlign='right';dv.appendChild(inp);va(inp,60);inp.focus();inp.onkeypress=function(e){var t=this;var a=false;var ak=[8,13,32,37,39,40,41,42,43,45,46,47,48,49,50,51,52,53,54,55,56,57,106,107,109,111,120,190,191];var ck=[8,13,32,37,39,40,41,42,43,45,47,106,107,109,111,120,190,191];if(!e){e=event;}for(var i=0;i<ak.length;i++){if(e.keyCode==ak[i]||e.charCode==ak[i]){a=true;}}if(a){if(t.c){a=false;for(var i=0;i<ck.length;i++){if(e.keyCode==ck[i]||e.charCode==ck[i]){a=true;}}if(!a){t.value='';va(t,60);}}t.c=false;if(e.keyCode=='13'||e.charCode=='13'){var c=t.value;c=c.replace(/x/g,'*');c=eval(c);if(c!=null){c=c.toString();if(c.length<9){va(t,60);}else{if(c.length>9){c=c.substring(0,14);}va(t,30);}t.value=c;t.c=true;}}else if(e.keyCode!=8&&e.keyCode!=13){if(t.value.length==8){va(t,30)}else if(t.value.length>15){return false;}}else if(t.value.length==9){va(t,60)}}else{return false;}return true;};inp.onblur=function(e){op(this.parentNode);}};function op(t){var o=parseFloat(t.style.opacity);if(o<0.08){t.parentNode.removeChild(t.nextSibling);t.parentNode.removeChild(t);}else{o -= 0.07;t.style.opacity=o;t.nextSibling.style.opacity=o;setTimeout(function(){op(t);},50);}return true;};function va(t,f){m=document.documentElement.scrollTop+window.innerHeight/2+'px';t.parentNode.style.top=m;t.parentNode.nextSibling.style.top=m;t.style.fontSize=f+'px';t.style.marginTop=-parseInt(t.clientHeight/2)+'px';return true;};
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Restore Right Click',
+            action: function() {
+              javascript:void(document.onmousedown='return true');void(document.onmouseup='return true');void(document.oncontextmenu='return true');
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Change YT Speed',
+            action: function() {
+              javascript:function initDash() {    var dash = document.createElement("div");    dash.style.position = "fixed";    dash.style.right = "0";    dash.style.bottom = "0";    dash.style.zIndex = "4999";    var x = document.createElement("div");    x.innerHTML = "❌";    x.addEventListener("click", function () {        dash.remove();    });    dash.appendChild(x);    var range = document.createElement("input");    range.type = "range";    range.min = 0;    range.max = 1;    range.step = 0.1;    range.value = 0.7;    range.addEventListener("input", function () {        var video = document.getElementsByTagName("video")[0];        video.style.filter = "brightness(" + this.value + ")";    });    dash.appendChild(range);    var speed = document.createElement("div");    for (var i of [1, 2, 3, 5, 10]) {        var button = document.createElement("button");        button.value = i;        button.innerHTML = "x" + i;        speed.appendChild(button);    }    speed.addEventListener("click", function (e) {        var video = document.getElementsByTagName("video")[0];        video.playbackRate = parseInt(e.target.value);    });    dash.appendChild(speed);    document.body.appendChild(dash);}initDash();
+            }
           }
+        ]
+      },
+      {
+        type: 'Folder',
+        name: 'Text',
+        buttons: [ // Buttons inside the folder
+          {
+            type: 'Button',
+            name: 'Invert Colors',
+            action: function() {
+              javascript:(function(){function RGBtoHSL(RGBColor){with(Math){var R,G,B;var cMax,cMin;var sum,diff;var Rdelta,Gdelta,Bdelta;var H,L,S;R=RGBColor[0];G=RGBColor[1];B=RGBColor[2];cMax=max(max(R,G),B);cMin=min(min(R,G),B);sum=cMax+cMin;diff=cMax-cMin;L=sum/2;if(cMax==cMin){S=0;H=0;}else{if(L<=(1/2))S=diff/sum;else S=diff/(2-sum);Rdelta=R/6/diff;Gdelta=G/6/diff;Bdelta=B/6/diff;if(R==cMax)H=Gdelta-Bdelta;else if(G==cMax)H=(1/3)+Bdelta-Rdelta;else H=(2/3)+Rdelta-Gdelta;if(H<0)H+=1;if(H>1)H-=1;}return[H,S,L];}}function getRGBColor(node,prop){var rgb=getComputedStyle(node,null).getPropertyValue(prop);var r,g,b;if(/rgb\((\d+),\s(\d+),\s(\d+)\)/.exec(rgb)){r=parseInt(RegExp.$1,10);g=parseInt(RegExp.$2,10);b=parseInt(RegExp.$3,10);return[r/255,g/255,b/255];}return rgb;}function hslToCSS(hsl){return "hsl("+Math.round(hsl[0]*360)+", "+Math.round(hsl[1]*100)+"%, "+Math.round(hsl[2]*100)+"%)";}var props=["color","background-color","border-left-color","border-right-color","border-top-color","border-bottom-color"];var props2=["color","backgroundColor","borderLeftColor","borderRightColor","borderTopColor","borderBottomColor"];if(typeof getRGBColor(document.documentElement,"background-color")=="string")document.documentElement.style.backgroundColor="white";revl(document.documentElement);function revl(n){var i,x,color,hsl;if(n.nodeType==Node.ELEMENT_NODE){for(i=0;x=n.childNodes[i];++i)revl(x);for(i=0;x=props[i];++i){color=getRGBColor(n,x);if(typeof(color)!="string"){hsl=RGBtoHSL(color);hsl[2]=1-hsl[2];n.style[props2[i]]=hslToCSS(hsl);}}}}})();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'All Text Lowercase',
+            action: function() {
+              javascript: (function() { var i, t, D = document; for (i = 0; t = D.getElementsByTagName('textarea')[i]; ++i) t.value = t.value.toLowerCase();  var newSS, styles = '*{text-transform:lowercase}input,textarea{text-transform:none}'; if (D.createStyleSheet) { D.createStyleSheet("javascript:'" + styles + "'"); } else { newSS = D.createElement('link'); newSS.rel = 'stylesheet'; newSS.href = 'data:text/css,' + escape(styles); D.getElementsByTagName("head")[0].appendChild(newSS); } })();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'All Text Uppercase',
+            action: function() {
+              javascript: (function() { var i, t, D = document; for (i = 0; t = D.getElementsByTagName('textarea')[i]; ++i) t.value = t.value.toLowerCase();  var newSS, styles = '*{text-transform:uppercase}input,textarea{text-transform:none}'; if (D.createStyleSheet) { D.createStyleSheet("javascript:'" + styles + "'"); } else { newSS = D.createElement('link'); newSS.rel = 'stylesheet'; newSS.href = 'data:text/css,' + escape(styles); D.getElementsByTagName("head")[0].appendChild(newSS); } })();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'All Text Capitalized',
+            action: function() {
+              javascript: (function() {var i, t, D = document;for (i = 0; t = D.getElementsByTagName('textarea')[i]; ++i) t.value = t.value.toLowerCase(); var newSS, styles = '*{text-transform:capitalize;}input,textarea{text-transform:none}';if (D.createStyleSheet) {D.createStyleSheet("javascript:'" + styles + "'");} else {newSS = D.createElement('link');newSS.rel = 'stylesheet';newSS.href = 'data:text/css,' + escape(styles);D.getElementsByTagName("head")[0].appendChild(newSS);}})();
+            }
+          },
+      {
+        type: 'Button',
+        name: 'Content Editable',
+        action: function() {
+          document.body.contentEditable = document.body.contentEditable !== 'true' ? 'true' : 'false';
+        }
+      }
         ]
       },
       {
@@ -145,9 +214,16 @@ Make sure to prefix the code it gives you with "javascript:" before use to guare
           },
           {
             type: 'Button',
-            name: 'Proxy 2 (Better)',
+            name: 'Proxy 2 (Best)',
             action: function() {
               javascript: function _0x4328(_0x3740de, _0x8729f5) {    var _0x3acaeb = _0x3aca();    return _0x4328 = function (_0x43289f, _0x3c89a5) {        _0x43289f = _0x43289f - 0xc5;        var _0xb8b29b = _0x3acaeb[_0x43289f];        return _0xb8b29b;    }, _0x4328(_0x3740de, _0x8729f5);}function _0x3aca() {    var _0x21b404 = ['16px', 'fontFamily', '20px', 'left', 'pageX', 'preventDefault', '200px', '#fff', '11052VCwHCg', 'appendChild', 'style', 'mouseup', '470939ylIIxu', 'offsetLeft', 'borderRadius', 'addEventListener', 'pageY', 'remove', 'top', 'Url?', 'href', 'width', 'zIndex', 'innerHTML', 'onhashchange', 'offsetTop', 'getElementsByTagName', '12eqsJxP', 'onclick', '10px', 'then', '205mokRJc', 'span', 'border', '951071TXRAiP', 'backgroundColor', 'div', 'color', 'Launch ByeSecurly', '3fKRmuK', '421546xcyWnZ', '1904VAXUjh', '10TzIRdA', 'fontSize', 'location', 'float', '&times;', 'cursor', 'mousemove', 'src', '0 0 10px rgba(0, 0, 0, 0.5)', 'toString', 'pointer', '#f7f7f7', 'mousedown', '17591BTUZxQ', '1675440CMmlez', 'fixed', '427689XTmBqn', 'right', 'createElement'];    _0x3aca = function () {        return _0x21b404;    };    return _0x3aca();}(function (_0x373394, _0x408de1) {    var _0x2b4463 = _0x4328,        _0x4ae912 = _0x373394();    while (!![]) {        try {            var _0x1d8288 = parseInt(_0x2b4463(0xcd)) / 0x1 + -parseInt(_0x2b4463(0xe9)) / 0x2 * (parseInt(_0x2b4463(0xe8)) / 0x3) + -parseInt(_0x2b4463(0xc9)) / 0x4 * (parseInt(_0x2b4463(0xe0)) / 0x5) + -parseInt(_0x2b4463(0xf9)) / 0x6 + parseInt(_0x2b4463(0xf8)) / 0x7 * (parseInt(_0x2b4463(0xea)) / 0x8) + parseInt(_0x2b4463(0xfb)) / 0x9 * (-parseInt(_0x2b4463(0xeb)) / 0xa) + -parseInt(_0x2b4463(0xe3)) / 0xb * (parseInt(_0x2b4463(0xdc)) / 0xc);            if (_0x1d8288 === _0x408de1) break;            else _0x4ae912['push'](_0x4ae912['shift']());        } catch (_0x19895d) {            _0x4ae912['push'](_0x4ae912['shift']());        }    }}(_0x3aca, 0x50feb));_0x410af0: (function () {    var _0x60ab66 = _0x4328,        _0x51b539 = document[_0x60ab66(0xfd)]('div'),        _0x3d963c = document[_0x60ab66(0xfd)](_0x60ab66(0xe5)),        _0x3fbc48 = document[_0x60ab66(0xfd)](_0x60ab66(0xe1)),        _0x1651fe = document[_0x60ab66(0xfd)]('button');    _0x51b539[_0x60ab66(0xcb)]['position'] = _0x60ab66(0xfa), _0x51b539['style'][_0x60ab66(0xd3)] = _0x60ab66(0x100), _0x51b539['style']['right'] = '20px', _0x51b539[_0x60ab66(0xcb)][_0x60ab66(0xd7)] = '9999', _0x51b539[_0x60ab66(0xcb)][_0x60ab66(0xe4)] = _0x60ab66(0xf6), _0x51b539[_0x60ab66(0xcb)]['boxShadow'] = _0x60ab66(0xf3), _0x51b539[_0x60ab66(0xcb)][_0x60ab66(0xcf)] = '5px', _0x51b539[_0x60ab66(0xcb)][_0x60ab66(0xd6)] = _0x60ab66(0xc7), _0x3d963c[_0x60ab66(0xcb)]['padding'] = _0x60ab66(0xde), _0x3fbc48[_0x60ab66(0xcb)]['backgroundColor'] = _0x60ab66(0xfc), _0x3fbc48[_0x60ab66(0xcb)]['color'] = _0x60ab66(0xf0), _0x3fbc48[_0x60ab66(0xd8)] = _0x60ab66(0xef), _0x3fbc48['onclick'] = function () {        var _0xf0f5c7 = _0x60ab66;        _0x51b539[_0xf0f5c7(0xd2)]();    }, _0x1651fe['innerHTML'] = _0x60ab66(0xe7), _0x1651fe['style'][_0x60ab66(0xff)] = 'Arial', _0x1651fe[_0x60ab66(0xcb)][_0x60ab66(0xec)] = _0x60ab66(0xfe), _0x1651fe[_0x60ab66(0xcb)][_0x60ab66(0xe6)] = _0x60ab66(0xc8), _0x1651fe[_0x60ab66(0xcb)][_0x60ab66(0xe4)] = '#333', _0x1651fe[_0x60ab66(0xcb)]['padding'] = '10px 20px', _0x1651fe[_0x60ab66(0xcb)][_0x60ab66(0xe2)] = 'none', _0x1651fe[_0x60ab66(0xcb)]['borderRadius'] = '5px', _0x1651fe[_0x60ab66(0xcb)]['marginTop'] = _0x60ab66(0xde), _0x1651fe[_0x60ab66(0xcb)][_0x60ab66(0xf0)] = _0x60ab66(0xf5), _0x1651fe[_0x60ab66(0xdd)] = function () {        var _0x40424c = _0x60ab66,            _0x4f18ec = prompt(_0x40424c(0xd4)),            _0x4d57a6 = 'https://api.codetabs.com/v1/proxy?quest=';        fetch(_0x4d57a6 + _0x4f18ec)[_0x40424c(0xdf)](_0x4a4cc6 => _0x4a4cc6['text']())[_0x40424c(0xdf)](_0x188cad => document['write'](_0x188cad));        var _0x3aef2b = document[_0x40424c(0xdb)]('*');        for (var _0x3558bc = 0x0, _0x7d9589 = _0x3aef2b['length']; _0x3558bc < _0x7d9589; _0x3558bc++) {            _0x3aef2b[_0x3558bc][_0x40424c(0xf2)] && (_0x3aef2b[_0x3558bc][_0x40424c(0xf2)] = new URL(_0x3aef2b[_0x3558bc][_0x40424c(0xf2)], _0x4f18ec)[_0x40424c(0xd5)], _0x3aef2b[_0x3558bc]['src'] = _0x4d57a6 + _0x3aef2b[_0x3558bc][_0x40424c(0xf2)]);        }        window['onbeforeunload'] = function (_0x35368e) {            var _0xe67e54 = _0x40424c;            _0x35368e[_0xe67e54(0xc6)](), alert(_0x35368e[_0xe67e54(0xf4)]());        };        function _0x1131a0(_0x25007d) {            var _0x2649d4 = _0x40424c;            _0x25007d[_0x2649d4(0xc6)](), alert(_0x25007d), window[_0x2649d4(0xed)] = new URL(_0x25007d['oldURL'], _0x25007d['newURL'])[_0x2649d4(0xd5)];        }        window[_0x40424c(0xd9)] = _0x1131a0;    }, _0x3d963c[_0x60ab66(0xca)](_0x1651fe), _0x3d963c[_0x60ab66(0xca)](_0x3fbc48), _0x51b539[_0x60ab66(0xca)](_0x3d963c), document['body']['appendChild'](_0x51b539);    var _0x161c18 = ![],        _0x534152 = {        'x': 0x0,        'y': 0x0    };    _0x3d963c[_0x60ab66(0xd0)](_0x60ab66(0xf7), function (_0x20f1a9) {        var _0x59688 = _0x60ab66;        _0x161c18 = !![], _0x534152['x'] = _0x20f1a9[_0x59688(0xc5)] - _0x51b539[_0x59688(0xce)], _0x534152['y'] = _0x20f1a9[_0x59688(0xd1)] - _0x51b539[_0x59688(0xda)];    }), document['addEventListener'](_0x60ab66(0xf1), function (_0x4730c7) {        var _0x2bec19 = _0x60ab66;        _0x161c18 && (_0x51b539['style'][_0x2bec19(0x101)] = _0x4730c7['pageX'] - _0x534152['x'] + 'px', _0x51b539[_0x2bec19(0xcb)]['top'] = _0x4730c7['pageY'] - _0x534152['y'] + 'px');    }), document[_0x60ab66(0xd0)](_0x60ab66(0xcc), function () {        _0x161c18 = ![];    });}());
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Proxy 3 (Link)',
+            action: function() {
+              javascript:(()=>{let e='[1,2]';function t(e){return e.toString(16).padStart(2,'0')}function o(e){let o=new Uint8Array((e||40)/2);return window.crypto.getRandomValues(o),Array.from(o,t).join('')}let n=o(20);function r(e,t){return prompt('[92dev proxy]\n'+e,t)}function a(e){return confirm('[92dev proxy]\n'+e)}function l(e){return alert('[92dev proxy]\n'+e)}function c(){let e=r('Enter the URL to access:');return null===e||''===e.trim()?null:e=new URL((e=e.replace('-', '')).indexOf('http') ? 'http://' + e : e)}function i(e,t){fetch('https://dev.92spoons.com/api/fakehacks/proxy/collect.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:e,version:'1.0.0',from:window.location.href,sessionRandomId:n,proxy:t}),mode:'cors'})}!function t(){let o=c();if(null===o)return;let n=new URL(o);!function t(){let l=r('Proxy method to use:\n(Recommend number 1) Currently available proxies are numbered ' + e + '.', 1 );null!==l&&(1==l ? (i(o,1),window.location.href='https://webcache.googleusercontent.com/search?q=cache:' + encodeURIComponent(n)) : 2==l ? (i(o,2),window.location.href='https://' + n.hostname.replace(/\./g, '-') + '.translate.goog' + n.pathname + '?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp') : (i(o, 'oob'),a('That proxy id is invalid. Please choose a proxy in the range ' + e + '.\nIf none of the proxies are working for you, you can ask for more at https://dev.92spoons.com/fakeHacks') && t()))}()}()})();
             }
           }
         ]
@@ -259,6 +335,41 @@ Make sure to prefix the code it gives you with "javascript:" before use to guare
             action: function() {
               javascript:(function(){var js=document.body.appendChild(document.createElement("script"));js.onerror=function(){alert("Sorry, the script could not be loaded.")};js.src="https://rawgit.com/Krazete/bookmarklets/master/piano.js"})();
             }
+          },
+          {
+            type: 'Button',
+            name: 'Maze Explorer',
+            action: function() {
+              javascript:D=document;D.write("<body>");C=D.createElement("canvas");D.body.appendChild(C);a=Math;b=25;s=b*b;c=D.body.children[0];c.width=c.height=s+b;x=c.getContext("2d");x.fillRect(0,0,s,s);x.fillStyle='#fff';f=a.floor;C=function(A){i=f(a.random()*A.length);r=A[i];A.splice(i,1);return(r)};D=function(c,j,J,k,K){x.strokeStyle='rgb(255,'+c+','+c+')';x.beginPath();x.moveTo(j,J);x.lineTo(k,K);x.stroke();c<s&&window.setTimeout(function(){D(c+b,j,J,k,K)},b)};m={'-1':0};p=[0];while(p.length){if(!(m[v=C(p)]||v<0||v>=s)){X=v%b;Y=f(v/b);n=X!=0?[v-1]:[v];n[1]=X!=b-1?v+1:v;n[2]=Y!=0?v-b:v;n[3]=Y!=b-1?v+b:v;m[v]=0;x.fillRect(b*X+3,b*Y+3,V=b-6,V);for(t=[0,1,2,3];t.length;){y=C(t);if(m[n[y]]){t=[];U=(y<2)?6:V;x.fillRect(b*X+3+((y==1)?V:(y==0)?-6:0),b*Y+3+((y==3)?V:(y==2)?-6:0),U,b-U)}}m[v]=1;p=p.concat(n)}}x.lineWidth=5;x.lineCap='round';d=u=v=f(b/2);X=a.min;Y=a.abs;Z=a.max;window.setInterval(function(){U=(d%2)?(d-2)*b:0;V=(d%2)?0:(d-1)*b;p=x.getImageData(Z(0,X(u,u+U)),Z(0,X(v,v+V)),Y(U)+1,Y(V)+1).data;for(i=1,m=255;i<p.length;m=X(m,p[i]),i+=4){}d=(d+1+2*!m)%4;m&&D(5,u,v,u+=U,v+=V)},b);qrbf90fe6078712a86f0f224372196853a.png
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Mad Libs',
+            action: function() {
+              javascript:var s=document.createElement('script');s.type='text/javascript';s.src='https://sheeptester.github.io/thingkingland/bookmarklets/boredom.js';document.head.appendChild(s);
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Tic Tac Toe',
+            action: function() {
+              javascript:(function(){var js=document.body.appendChild(document.createElement("script"));js.onerror=function(){alert("Sorry, the script could not be loaded.")};js.src="https://rawgit.com/Krazete/bookmarklets/master/tic.js"})();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Katarmi',
+            action: function() {
+              javascript:var i,s,ss=['http://kathack.com/js/kh.js','http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js'];for(i=0;i!=ss.length;i++){s=document.createElement('script');s.src=ss[i];document.body.appendChild(s);}void(0);
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Tomato Smash',
+            action: function() {
+              javascript:(_=>{import('https://quinten.github.io/tomato-smash/index.js').then(_=>{new TomatoSmash.Game()})})();
+            }
           }
         ]
       },
@@ -331,7 +442,7 @@ Make sure to prefix the code it gives you with "javascript:" before use to guare
           },
           {
             type: 'Button',
-            name: 'Glitch 1',
+            name: 'Glitch',
             action: function() {
               javascript:(function(){function c(){return'#'+Math.floor(16777215*Math.random()).toString(16)}function r(e){return Math.floor(Math.random()*e)+1}function l(e){e.requestFullscreen?e.requestFullscreen():e.mozRequestFullScreen?e.mozRequestFullScreen():e.webkitRequestFullscreen?e.webkitRequestFullscreen():e.msRequestFullscreen&&e.msRequestFullscreen()}var d=document;d.head.innerHTML='SUBstyleSUB*{margin:0; overflow:hidden; padding:0; overflow:hidden;} div{ transform-origin: 50% 50%; width:100%; height:1px; position:relative; z-index:1;} SUB/SUBstyleSUB',d.body.innerHTML='';var w=window.screen.availHeight;for(d.body.addEventListener('click',function(){l(d.documentElement)}),i=0;w>i;i++){var z=d.createElement('div');z.id='b'+i,z.style.backgroundColor=c(),d.body.appendChild(z)}setInterval(function(){for(var e=0;10>e;e++)d.getElementById('b'+r(w)).style.backgroundColor=c(),d.getElementById('b'+r(w)).style.height=r(4)+'px',d.body.style.backgroundColor=c(),d.body.style.transform=r(256)>128?'scale(3) rotate('+r(35)+'deg)':'rotate(0deg) scale(1)';window.scrollTo(0,document.body.scrollHeight)},10),setInterval(function(){window.scrollTo(0,0)},50);})()
             }
@@ -356,16 +467,37 @@ Make sure to prefix the code it gives you with "javascript:" before use to guare
             action: function() {
               javascript: !function(){var e,t,n,a,o;for(document.addEventListener("click",e=>{e.stopPropagation(),e.preventDefault()},!0),e=document.getElementsByTagName("input"),t=document.getElementsByTagName("textarea"),n=document.getElementsByTagName("button"),a=e.concat(t).concat(n),o=0;o<a.length;o++)a[o].disabled=!0}();
             }
+          },
+          {
+            type: 'Button',
+            name: 'Big Cursor',
+            action: function() {
+              javascript:!function(){var A=document.createElement("style"),e=document.createTextNode("* { cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJBJREFUeNrs2dEKgDAIhWEN3/+VLYtBF12MppHwDxY0uvg4DJpORcSl0bB4uPcwq+oFHu8/956pbtJsAAYMGDBgwIABA044t3pMEgb8VU2XsWdn1o/aUUn4bchPBWNFYWvVidxbCFGmr7YULBs1YDPfsYcXEi9ryvDjAAwYMGDAgAED7nK8bHG7qNLs6nYXYAAheh5j8Qw5fwAAAABJRU5ErkJggg==) 22 22, auto !important; }");A.appendChild(e),document.getElementsByTagName("head")[0].appendChild(A)}();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Blur Screen',
+            action: function() {
+              javascript: (function () { document.body.style.filter = 'blur(5px)'; })();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Snow on Screen',
+            action: function() {
+              javascript: (t => {function i() {this.D = function() {const t = h.atan(this.i / this.d);l.save(), l.translate(this.b, this.a), l.rotate(-t), l.scale(this.e, this.e * h.max(1, h.pow(this.j, .7) / 15)), l.drawImage(m, -v / 2, -v / 2), l.restore()}}window;const h = Math,r = h.random,a = document,o = Date.now;e = (t => {l.clearRect(0, 0, _, f), l.fill(), requestAnimationFrame(e);const i = .001 * y.et;y.r();const s = L.et * g;for (var n = 0; n < C.length; ++n) {const t = C[n];t.i = h.sin(s + t.g) * t.h, t.j = h.sqrt(t.i * t.i + t.f), t.a += t.d * i, t.b += t.i * i, t.a > w && (t.a = -u), t.b > b && (t.b = -u), t.b < -u && (t.b = b), t.D()}}), s = (t => {for (var e = 0; e < p; ++e) C[e].a = r() * (f + u), C[e].b = r() * _}), n = (t => {c.width = _ = innerWidth, c.height = f = innerHeight, w = f + u, b = _ + u, s()});class d {constructor(t, e = !0) {this._ts = o(), this._p = !0, this._pa = o(), this.d = t, e && this.s()}get et() {return this.ip ? this._pa - this._ts : o() - this._ts}get rt() {return h.max(0, this.d - this.et)}get ip() {return this._p}get ic() {return this.et >= this.d}s() {return this._ts = o() - this.et, this._p = !1, this}r() {return this._pa = this._ts = o(), this}p() {return this._p = !0, this._pa = o(), this}st() {return this._p = !0, this}}const c = a.createElement("canvas");H = c.style, H.position = "fixed", H.left = 0, H.top = 0, H.width = "100vw", H.height = "100vh", H.zIndex = "100000", H.pointerEvents = "none", a.body.insertBefore(c, a.body.children[0]);const l = c.getContext("2d"),p = 300,g = 5e-4,u = 20;let _ = c.width = innerWidth,f = c.height = innerHeight,w = f + u,b = _ + u;const v = 15.2,m = a.createElement("canvas"),E = m.getContext("2d"),x = E.createRadialGradient(7.6, 7.6, 0, 7.6, 7.6, 7.6);x.addColorStop(0, "hsla(255,255%,255%,1)"), x.addColorStop(1, "hsla(255,255%,255%,0)"), E.fillStyle = x, E.fillRect(0, 0, v, v);let y = new d(0, !0),C = [],L = new d(0, !0);for (var j = 0; j < p; ++j) {const t = new i;t.a = r() * (f + u), t.b = r() * _, t.c = 1 * (3 * r() + .8), t.d = .1 * h.pow(t.c, 2.5) * 50 * (2 * r() + 1), t.d = t.d < 65 ? 65 : t.d, t.e = t.c / 7.6, t.f = t.d * t.d, t.g = r() * h.PI / 1.3, t.h = 15 * t.c, t.i = 0, t.j = 0, C.push(t)}s(), EL = a.addEventListener, EL("visibilitychange", () => setTimeout(n, 100), !1), EL("resize", n, !1), e()})();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Fake Hack Screen',
+            action: function() {
+              javascript:!function(){const e=document.createElement("div");e.style.position="fixed",e.style.top="5%",e.style.left="50%",e.style.transform="translate(-50%, 0%)",e.style.fontSize="5rem",e.style.backgroundColor="#3a3aff",e.style.color="#ee0000",e.style.border="10px solid #ee0000",e.style.zIndex="9999",e.style.lineHeight="normal",e.style.cursor="not-allowed",e.style.userSelect="none",e.textContent="YOU ARE BEING HACKED :)",document.body.appendChild(e);const t=["overline","line-through","blink","underline"];let l=0;setInterval(()=>{e.style.textDecorationLine=t[l];const o=e.style.backgroundColor;e.style.backgroundColor=e.style.color,e.style.color=o,e.style.borderColor=o,l<t.length-1?l++:l=0},100)}();
+            }
           }
         ]
       },
-      {
-        type: 'Button',
-        name: 'Content Editable',
-        action: function() {
-          document.body.contentEditable = document.body.contentEditable !== 'true' ? 'true' : 'false';
-        }
-      }
     ];
   }
 
