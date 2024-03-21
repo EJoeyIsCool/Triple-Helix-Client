@@ -1,0 +1,129 @@
+(function() {
+  // Define the main client container
+  const client = document.createElement('div');
+  // Define the title element
+  const titleElement = document.createElement('h2');
+  titleElement.textContent = 'Client Title'; // Default client title
+
+  // Define initial button configurations
+  let buttons = getInitialButtons();
+
+  // Function to set up client styles and add title element
+  function setupClient(clientElement, title = 'Triple Helix') {
+    clientElement.innerHTML = ''; // Clear previous content including the old title
+    titleElement.textContent = title; // Update title
+    clientElement.appendChild(titleElement); // Append the updated title element
+    clientElement.style.position = 'fixed';
+    clientElement.style.top = '10px';
+    clientElement.style.left = '10px';
+    clientElement.style.backgroundColor = 'white';
+    clientElement.style.boxShadow = '0 0 5px rgba(0, 0, 0, 0.2)';
+    clientElement.style.padding = '10px';
+    clientElement.style.zIndex = '10000';
+    clientElement.style.borderRadius = '10px';
+    clientElement.style.display = 'flex';
+    clientElement.style.flexDirection = 'column';
+    clientElement.style.maxHeight = '90vh';
+    clientElement.style.flexWrap = 'wrap';
+    clientElement.style.alignItems = 'flex-start';
+  }
+
+  // Function to initialize the default buttons
+  function getInitialButtons() {
+    return [
+      {
+        type: 'Folder',
+        name: 'EXAMPLE FOLDER',
+        buttons: [ // Buttons inside the folder
+          {
+            type: 'Button',
+            name: 'EXAMPLE BUTTON 1',
+            action: function() {
+              javascript:alert("This is an example!")
+            }
+          },
+      {
+        type: 'Button',
+        name: 'EXAMPLE BUTTON 2',
+        action: function() {
+          javascript:alert("This is an example!")
+        }
+      },
+        ]
+      },
+    ];
+  }
+
+  // Function to render buttons
+  function renderButtons(buttons, clientElement, backButtonAction) {
+    buttons.forEach(btn => {
+      if (btn.type === 'Button') {
+        const button = createButton(btn.name, btn.action);
+        clientElement.appendChild(button);
+      } else if (btn.type === 'Folder') {
+        const button = createButton(btn.name, () => openFolder(btn, clientElement));
+        clientElement.appendChild(button);
+      }
+    });
+
+    // Add a back button if backButtonAction is provided
+    if (backButtonAction) {
+      const backButton = createButton('Back', backButtonAction);
+      clientElement.appendChild(backButton);
+    }
+  }
+
+  // Function to create a button
+  function createButton(name, action) {
+    const button = document.createElement('button');
+    button.textContent = name;
+    button.style = `
+      display: block;
+      margin: 5px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+    `;
+
+    button.onmouseover = function() {
+      button.style.backgroundColor = '#45a049';
+    };
+    button.onmouseout = function() {
+      button.style.backgroundColor = '#4CAF50';
+    };
+
+    button.onclick = action;
+
+    return button;
+  }
+
+  // Function to open a folder
+  function openFolder(folderConfig, clientElement) {
+    setupClient(clientElement, folderConfig.name); // Reset to initial client styles and set folder name as title
+    renderButtons(folderConfig.buttons, clientElement, () => {
+      setupClient(clientElement); // Reset to initial client styles with default title
+      renderButtons(buttons, clientElement); // Render the initial buttons
+    });
+  }
+
+  // Apply initial client styles and add title
+  setupClient(client);
+
+  // Initial rendering of buttons
+  renderButtons(buttons, client);
+
+  // Append the client to the body
+  document.body.appendChild(client);
+
+  // Add an event listener to the document to remove the client when clicking outside of it
+  document.addEventListener('click', function(event) {
+    if (!client.contains(event.target)) { // Check if the click is outside the client
+      client.remove(); // Remove the client from the page
+    }
+  }, true); // Use capturing to ensure this runs before any other click events
+})();
