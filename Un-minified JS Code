@@ -1,8 +1,3 @@
-Run the following code through https://skalman.github.io/UglifyJS-online/ in order to minify it and make it usable.
-Make sure to prefix the code it gives you with "javascript:" before use to guarantee it works. (It still obviously won't work on sites with JS disabled.)
-
-
-
 (function() {
   // Define the main client container
   const client = document.createElement('div');
