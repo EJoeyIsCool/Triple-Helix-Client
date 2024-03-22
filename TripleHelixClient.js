@@ -3,4 +3,4 @@ Simply change the name of the bookmark to "Triple Helix Client" and you're ready
 If you run into any errors, an alternative is going to FullCode.js, copying it, and then dragging that into your bookmarks bar. But this is easier.
 
 Code:
-javascript:!function(){var e=document.createElement("script");e.src="https://ejoeyiscool.github.io/Triple-Helix-Client/FullCode.js",e.onerror=function(){alert("Failed to load the script. Check if the website you are on has Javascript execution enabled.")},document.body.appendChild(e)}();
+javascript:(function(){var s=document.createElement('script');s.src='https://ejoeyiscool.github.io/Triple-Helix-Client/MinifiedCode.js';s.onerror=function(){alert('Failed to load the script. Check if the website you are on has Javascript execution enabled.')};document.body.appendChild(s);})();
