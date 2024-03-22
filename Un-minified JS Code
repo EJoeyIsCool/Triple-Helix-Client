@@ -109,6 +109,82 @@
       },
       {
         type: 'Folder',
+        name: 'Math',
+        buttons: [ // Buttons inside the folder
+          {
+            type: 'Button',
+            name: 'Calculator',
+            action: function() {
+              javascript:(function(){var a=prompt('Enter the arithmetic expression:');if(a){alert('Result: '+eval(a))}})();
+            }
+          },
+          {
+        type: 'Button',
+        name: 'System Solver',
+        action: function() {
+          javascript:(function(){    let input=prompt('Enter your equations, separated by semicolons. For example, "3,4=1; 2,3=1":');    if(!input) return;    let equations=input.split(';').map(eq => eq.trim().split('='));    let matrix=equations.map(eq => eq[0].split(',').map(Number));    let constants=equations.map(eq => Number(eq[1]));        if(matrix.length !== matrix[0].length) {        alert('The number of equations does not match the number of unknowns.');        return;    }    function solve(matrix, constants) {        let n=constants.length;        for(let i=0; i<n; i++) {            let max=i;            for(let j=i+1; j<n; j++) {                if(Math.abs(matrix[j][i]) > Math.abs(matrix[max][i])) max=j;            }            if(i !== max) {                [matrix[i], matrix[max]] = [matrix[max], matrix[i]];                [constants[i], constants[max]] = [constants[max], constants[i]];            }            for(let k=i+1; k<n; k++) {                let factor=matrix[k][i] / matrix[i][i];                for(let j=i; j<n; j++) matrix[k][j] -= factor * matrix[i][j];                constants[k] -= factor * constants[i];            }        }        let solution=Array(n).fill(0);        for(let i=n-1; i>=0; i--) {            solution[i] = constants[i] / matrix[i][i];            for(let j=i-1; j>=0; j--) constants[j] -= matrix[j][i] * solution[i];        }        return solution.map(num => Math.round(num * 10000) / 10000);    }        let solution=solve(matrix, constants);    if(solution.every(isFinite)) {        alert('Solution: ' + solution.join(', '));    } else {        alert('No unique solution found.');    }})();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Prime Factorizor',
+            action: function() {
+              javascript:(function(){    let input = prompt('Enter a positive integer for prime factorization:');    let number = parseInt(input);    if (isNaN(number) || number < 1) {        alert('Please enter a valid positive integer.');        return;    }    let factors = primeFactors(number);    let formattedFactors = formatFactors(factors);    alert(formattedFactors);    function primeFactors(n) {        let factors = [], divisor = 2;        while (n >= 2) {            if (n % divisor == 0) {                factors.push(divisor);                n = n / divisor;            } else {                divisor++;            }        }        return factors;    }    function formatFactors(factors) {        let factorCounts = factors.reduce((acc, factor) => {            acc[factor] = (acc[factor] || 0) + 1;            return acc;        }, {});        let formatted = Object.keys(factorCounts).map(factor => {            if (factorCounts[factor] === 1) return factor;            return `${factor}^${factorCounts[factor]}`;        }).join(' * ');        return formatted;    }})();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Fibonacci Sequence',
+            action: function() {
+              javascript:(function(){let n=parseInt(prompt('Enter the number of Fibonacci terms:'));if(isNaN(n)||n<1){alert('Please enter a valid positive integer.');return;}let fib=[1,1];for(let i=2;i<n;i++){fib[i]=fib[i-1]+fib[i-2];}alert(fib.join(', '));})();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Collatz Conjecture',
+            action: function() {
+              javascript:(function(){let n=parseInt(prompt('Enter a starting number for the Collatz sequence:'));if(isNaN(n)||n<1){alert('Please enter a valid positive integer.');return;}let seq=[n];while(n>1){n=n%2===0?n/2:3*n+1;seq.push(n);}alert('Collatz sequence: '+seq.join(', '));})();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Number in Base N',
+            action: function() {
+              javascript:(function(){let num=prompt('Enter a number:');let base=parseInt(prompt('Enter the base to convert to (2-36):'));if(isNaN(base)||base<2||base>36){alert('Please enter a valid base between 2 and 36.');return;}let converted=parseInt(num).toString(base);alert('Number in base '+base+': '+converted);})();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Largest Prime Under N',
+            action: function() {
+              javascript:(function(){let n=parseInt(prompt('Enter a maximum number:'));if(isNaN(n)||n<1){alert('Please enter a valid positive integer.');return;}for(let i=n; i>1; i--){if(isPrime(i)){alert('Largest prime less than '+n+': '+i);break;}}function isPrime(num){for(let j=2, s=Math.sqrt(num); j<=s; j++)if(num%j===0)return false;return num>1;}})();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Nth Prime',
+            action: function() {
+              javascript:(function(){let n=parseInt(prompt('Enter n to find the nth prime number:'));if(isNaN(n)||n<1){alert('Invalid input');return;}let count=0,i=1;while(count<n){i++;if(isPrime(i)){count++;}}alert(i);function isPrime(num){for(let j=2,s=Math.sqrt(num);j<=s;j++)if(num%j===0)return false;return num>1;}})();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Factorial',
+            action: function() {
+              javascript:(function(){let n=parseInt(prompt('Enter a number to calculate its factorial:'));if(isNaN(n)||n<0){alert('Please enter a valid non-negative integer.');return;}let result=factorial(n);alert(n+'! = '+result);function factorial(num){let res=BigInt(1);for(let i=BigInt(2);i<=BigInt(num);i++){res*=i;}return res.toString();}})();
+            }
+          },
+          {
+            type: 'Button',
+            name: 'Patern Finder',
+            action: function() {
+              javascript:(function(){    let userInput = prompt('Enter a sequence of numbers separated by commas:');    if (!userInput) {        alert('No input provided.');        return;    }    let sequence = userInput.split(',').map(Number);    if (sequence.some(isNaN)) {        alert('Invalid sequence. Please enter only numbers separated by commas.');        return;    }    let pattern = analyzeSequence(sequence);    alert('Pattern: ' + pattern);    function analyzeSequence(seq) {        if (seq.length < 3) return 'Insufficient data for pattern analysis.';        let isFibonacci = seq.every((val, i) => i < 2 || val === (seq[i - 1] + seq[i - 2]));        let firstTwo = seq.slice(0, 2).join(', ');        let diff = seq[1] - seq[0];        let ratio = seq[1] / seq[0];        let isArithmetic = seq.every((val, i, arr) => i === 0 || val - arr[i - 1] === diff);        let isGeometric = seq.every((val, i, arr) => i === 0 || val / arr[i - 1] === ratio);        let isSquare = seq.every((val, i, arr) => i === 0 || val === Math.pow(arr[i - 1], 2));        if (isFibonacci) return `Fibonacci-like sequence starting with: ${firstTwo}.`;        if (isArithmetic) return 'Arithmetic sequence with a difference of ' + diff + '.';        if (isGeometric) return 'Geometric sequence with a ratio of ' + ratio + '.';        if (isSquare) return 'Each number is the square of the previous one.';        return 'No simple arithmetic, geometric, Fibonacci-like, or squaring pattern detected.';    }})();
+            }
+          },
+        ]
+      },
+      {
+        type: 'Folder',
         name: 'Text',
         buttons: [ // Buttons inside the folder
           {
