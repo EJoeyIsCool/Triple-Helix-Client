@@ -1,5 +1,5 @@
 # Triple-Helix-Client
-My more intuitive and customizable client. If you run into any errors, try it on a Google Drive (JS Execution enabled on that site) because the site you are on may simply have JS disabled.
+My more intuitive and customizable client. If you run into any errors, try it on a Google Drive (JS Execution enabled on that site) because the site you are on may simply have JS disabled. If you want to just drag this into your bookmark bar, go to the TripleHelixClient.js section.
 
 MY INVOLVEMENT: I used AI to generate this, so do be aware that none of this was coded by me. (Also, all the bookmarklets were either made by AI or found online.)
 
