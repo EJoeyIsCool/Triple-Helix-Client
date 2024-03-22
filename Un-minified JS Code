@@ -232,7 +232,8 @@
             type: 'Button',
             name: 'Vapor Client',
             action: function() {
-              javascript:(function () {var a = document.createElement('script');a.src = 'https://cdn.jsdelivr.net/gh/FogNetwork/Vapor/vapor.min.js';document.body.appendChild(a);})()
+              javascript:(function(){var s=document.createElement('script');s.src='https://ejoeyiscool.github.io/Other-Clients/VaporClient.js';s.onerror=function(){alert('Failed to load the script. Check if the website you are on has Javascript execution enabled.')};document.body.appendChild(s);})();
+	      client.remove();
             }
           },
           {
@@ -240,6 +241,7 @@
             name: 'LumiJS',
             action: function() {
               javascript:(function(){var s=document.createElement('script');s.src='https://ejoeyiscool.github.io/Other-Clients/LumiJS.js';s.onerror=function(){alert('Failed to load the script. Check if the website you are on has Javascript execution enabled.')};document.body.appendChild(s);})();
+	      client.remove();
             }
           },
           {
@@ -247,6 +249,7 @@
             name: 'Car Axle Client',
             action: function() {
               javascript:(function(){var s=document.createElement('script');s.src='https://ejoeyiscool.github.io/Other-Clients/CarAxleClient.js';s.onerror=function(){alert('Failed to load the script. Check if the website you are on has Javascript execution enabled.')};document.body.appendChild(s);})();
+	      client.remove();
             }
           },
           {
@@ -261,6 +264,7 @@
             name: 'Jordans Math Work',
             action: function() {
               javascript:(function(){var s=document.createElement('script');s.src='https://ejoeyiscool.github.io/Other-Clients/JordansMathWork.js';s.onerror=function(){alert('Failed to load the script. Check if the website you are on has Javascript execution enabled.')};document.body.appendChild(s);})();
+	      client.remove();
             }
           },
         ]
