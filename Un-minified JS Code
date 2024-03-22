@@ -239,14 +239,14 @@
             type: 'Button',
             name: 'LumiJS',
             action: function() {
-              javascript:alert("Still working on this one, sorry!");
+              javascript:(function(){var s=document.createElement('script');s.src='https://ejoeyiscool.github.io/Other-Clients/LumiJS.js';s.onerror=function(){alert('Failed to load the script. Check if the website you are on has Javascript execution enabled.')};document.body.appendChild(s);})();
             }
           },
           {
             type: 'Button',
             name: 'Car Axle Client',
             action: function() {
-              javascript:alert("Still working on this one, sorry!");
+              javascript:(function(){var s=document.createElement('script');s.src='https://ejoeyiscool.github.io/Other-Clients/CarAxleClient.js';s.onerror=function(){alert('Failed to load the script. Check if the website you are on has Javascript execution enabled.')};document.body.appendChild(s);})();
             }
           },
           {
@@ -260,16 +260,9 @@
             type: 'Button',
             name: 'Jordans Math Work',
             action: function() {
-              javascript:alert("Still working on this one, sorry!");
+              javascript:(function(){var s=document.createElement('script');s.src='https://ejoeyiscool.github.io/Other-Clients/JordansMathWork.js';s.onerror=function(){alert('Failed to load the script. Check if the website you are on has Javascript execution enabled.')};document.body.appendChild(s);})();
             }
           },
-          {
-            type: 'Button',
-            name: 'Mutation Client',
-            action: function() {
-              javascript:alert("Still working on this one, sorry!");
-            }
-          }
         ]
       },
       {
